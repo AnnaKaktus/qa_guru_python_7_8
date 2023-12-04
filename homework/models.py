@@ -1,3 +1,7 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class Product:
     """
     Класс продукта
@@ -7,11 +11,11 @@ class Product:
     description: str
     quantity: int
 
-    def __init__(self, name, price, description, quantity):
-        self.name = name
-        self.price = price
-        self.description = description
-        self.quantity = quantity
+    # def __init__(self, name, price, description, quantity):
+    #     self.name = name
+    #     self.price = price
+    #     self.description = description
+    #     self.quantity = quantity
 
     def check_quantity(self, quantity) -> bool:
         """
@@ -54,7 +58,7 @@ class Cart:
         Если продукт уже есть в корзине, то увеличиваем количество
         """
 
-        if self.products.get(product) != None:
+        if self.products.get(product) is not None:
             self.products[product] += buy_count
         else:
             self.products[product] = buy_count
@@ -65,11 +69,10 @@ class Cart:
         Если remove_count не передан, то удаляется вся позиция
         Если remove_count больше, чем количество продуктов в позиции, то удаляется вся позиция
         """
-        if self.products.get(product) != None and remove_count == None or remove_count > self.products.get(product):
+        if self.products.get(product) is not None and remove_count is None or remove_count > self.products.get(product):
             del self.products[product]
         else:
             self.products[product] -= remove_count
-
 
     def clear(self):
 
@@ -83,7 +86,6 @@ class Cart:
 
         return total_price
 
-
     def buy(self):
         """
         Метод покупки.
@@ -95,8 +97,6 @@ class Cart:
             q = self.products.get(product)
             if q > product.quantity:
                 raise ValueError
-            elif q != None:
+            elif q is not None:
                 product.buy(q)
         self.products = {}
-
-

@@ -19,10 +19,9 @@ class TestProducts:
 
     def test_product_check_quantity(self, product):
         # TODO напишите проверки на метод check_quantity
-        assert True == product.check_quantity(999)
-        assert True == product.check_quantity(1000)
-        assert False == product.check_quantity(1001)
-
+        assert True is product.check_quantity(999)
+        assert True is product.check_quantity(1000)
+        assert False is product.check_quantity(1001)
 
     def test_product_buy(self, product):
         # TODO напишите проверки на метод buy
@@ -38,10 +37,11 @@ class TestProducts:
             product.buy(1001)
 
 
-
 @pytest.fixture
 def cart():
     return Cart()
+
+
 class TestCart:
     """
     TODO Напишите тесты на методы класса Cart
@@ -49,11 +49,12 @@ class TestCart:
         На некоторые методы у вас может быть несколько тестов.
         Например, негативные тесты, ожидающие ошибку (используйте pytest.raises, чтобы проверить это)
     """
+
     def test_add_product(self, cart, product):
         cart.add_product(product)
-        assert  1 == cart.products.get(product)
+        assert 1 == cart.products.get(product)
         cart.add_product(product, 3)
-        assert  4 == cart.products.get(product)
+        assert 4 == cart.products.get(product)
 
     def test_remove_product(self, cart, product):
         cart.add_product(product, 3)
@@ -63,7 +64,7 @@ class TestCart:
         assert 0 == cart.products.get(product)
         cart.add_product(product, 3)
         cart.remove_product(product, 4)
-        assert None == cart.products.get(product)
+        assert None is cart.products.get(product)
 
     def test_clear(self, cart, product):
         cart.add_product(product, 3)
@@ -74,7 +75,6 @@ class TestCart:
         cart.add_product(product, 3)
         cart.add_product(Product("hook", 200, "This is a hook", 2000), 3)
         assert 900 == cart.get_total_price()
-
 
     def test_buy(self, cart, product):
         cart.add_product(product, 3)
